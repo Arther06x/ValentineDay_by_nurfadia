@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Project 💖</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-layout">
+        
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="heart-pulse">💖</div>
+                <h2>Valentine<br>Project</h2>
+            </div>
+            
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home')">🏠 หน้าหลัก</button>
+                <button class="nav-btn" onclick="showSection('history')">📚 ประวัติ & ข้อมูล</button>
+                <button class="nav-btn" onclick="showSection('activities')">🎉 กิจกรรม</button>
+                <button class="nav-btn" onclick="showSection('quiz')">🎮 เกมตอบคำถาม</button>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <p>Created for Love</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="home" class="content-section active-section">
+                <div class="hero-box">
+                    <h1>ยินดีต้อนรับสู่โลกสีชมพู</h1>
+                    <p>โครงการศึกษาและวิเคราะห์ข้อมูลเกี่ยวกับวันวาเลนไทน์<br>ในมิติทางประวัติศาสตร์ เศรษฐกิจ และสังคม</p>
+                    <div class="action-buttons">
+                        <button class="cta-btn" onclick="showSection('history')">เข้าสู่บทเรียน 📖</button>
+                        <button class="outline-btn" onclick="showSection('quiz')">ทดสอบความรู้ 🎲</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="history" class="content-section" style="display: none;">
+                <h2>📚 สารบัญข้อมูลโครงการ</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #666;">เลือกหัวข้อที่ต้องการศึกษาเพื่อดูรายละเอียดเชิงลึก</p>
+                
+                <div class="topic-grid">
+                    <div class="topic-card" onclick="openModal('intro')">
+                        <div class="icon">📑</div>
+                        <h3>1: บทนำ</h3>
+                        <p>ที่มาและความสำคัญ</p>
+                    </div>
+                    
+                    <div class="topic-card" onclick="openModal('history-origin')">
+                        <div class="icon">🏛️</div>
+                        <h3>2: ประวัติศาสตร์</h3>
+                        <p>นักบุญวาเลนไทน์ & Lupercalia</p>
+                    </div>
+                    <div class="topic-card" onclick="openModal('culture')">
+                        <div class="icon">🎭</div>
+                        <h3>3: พัฒนาการวัฒนธรรม</h3>
+                        <p>ยุคกลาง & วิกตอเรียน</p>
+                    </div>
+                    <div class="topic-card" onclick="openModal('economy')">
+                        <div class="icon">💰</div>
+                        <h3>4: มิติเศรษฐศาสตร์</h3>
+                        <p>มูลค่า & การตลาดเชิงอารมณ์</p>
+                    </div>
+                    <div class="topic-card" onclick="openModal('psychology')">
+                        <div class="icon">🧠</div>
+                        <h3>5: มิติจิตวิทยา</h3>
+                        <p>ทฤษฎีความรัก & Love Language</p>
+                    </div>
+                    <div class="topic-card" onclick="openModal('sociology')">
+                        <div class="icon">👥</div>
+                        <h3>6: มิติสังคมวิทยา</h3>
+                        <p>บริบทสังคม & คนโสด</p>
+                    </div>
+                    <div class="topic-card" onclick="openModal('thai-context')">
+                        <div class="icon">🇹🇭</div>
+                        <h3>7: บริบทประเทศไทย</h3>
+                        <p>วันวาเลนไทน์ในไทย</p>
+                    </div>
+
+                    <div class="topic-card special-card" onclick="openModal('methodology')">
+                        <div class="icon">⚙️</div>
+                        <h3>8: วิธีดำเนินงาน</h3>
+                    </div>
+                    <div class="topic-card special-card" onclick="openModal('results')">
+                        <div class="icon">📈</div>
+                        <h3>บทที่ 9: ผลที่คาดหวัง</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="content-section" style="display: none;">
+                <h2>📅 สร้างตารางเดต 1 วัน</h2>
+                <p style="text-align: center; margin-bottom: 20px;">หมุนวงล้อเพื่อกำหนดกิจกรรมในแต่ละช่วงเวลา</p>
+                
+                <div class="wheel-container">
+                    <div class="stopper">🔻</div>
+                    <div class="wheel" id="love-wheel">
+                        <div class="wheel-center"><span>⏳</span></div>
+                    </div>
+                    <div class="wheel-shadow"></div>
+                </div>
+            
+                <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+                    <button id="spin-btn" class="spin-button" onclick="spinForSchedule()">สุ่มกิจกรรม: ช่วงเช้า 🌤️</button>
+                    <button id="reset-schedule-btn" class="nav-btn" onclick="resetSchedule()" style="display: none; background: #999; margin-left: 10px;">ล้างตารางเริ่มใหม่ 🔄</button>
+                </div>
+            
+                <div class="schedule-container">
+                    <h3>📋 Timeline ของเราวันนี้</h3>
+                    <div id="schedule-list" class="timeline-list">
+                        <div class="time-slot" id="slot-0">
+                            <div class="time-badge">09:00 - 11:30</div>
+                            <div class="slot-content">🌤️ รอลุ้นกิจกรรมช่วงเช้า...</div>
+                        </div>
+                        <div class="time-slot" id="slot-1">
+                            <div class="time-badge">12:00 - 13:30</div>
+                            <div class="slot-content">🍽️ รอลุ้นมื้อเที่ยง...</div>
+                        </div>
+                        <div class="time-slot" id="slot-2">
+                            <div class="time-badge">14:00 - 17:00</div>
+                            <div class="slot-content">🎬 รอลุ้นกิจกรรมบ่าย...</div>
+                        </div>
+                        <div class="time-slot" id="slot-3">
+                            <div class="time-badge">18:00 - 20:00</div>
+                            <div class="slot-content">🍷 รอลุ้นมื้อดินเนอร์...</div>
+                        </div>
+                        <div class="time-slot" id="slot-4">
+                            <div class="time-badge">20:30 เป็นต้นไป</div>
+                            <div class="slot-content">🌙 รอลุ้นกิจกรรมก่อนนอน...</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="result-display" class="result-box" style="display: none;">
+                    <h3 id="result-time-title">ช่วง...</h3>
+                    <p id="result-text" style="font-size: 1.3rem;">...</p>
+                    <button class="nav-btn" onclick="closeResult()" style="background: var(--primary); color: white; margin-top: 10px;">ลงตารางเวลา ✅</button>
+                </div>
+            </section>
+
+            <section id="quiz" class="content-section" style="display: none;">
+    
+                <div id="quiz-menu">
+                    <h2>🎮 Game Zone</h2>
+                    <p style="text-align: center; margin-bottom: 30px;">เลือกโหมดเกมที่ต้องการเล่น</p>
+                    
+                    <div class="game-selection-grid">
+                        <div class="game-card" onclick="startValentineGame()">
+                            <div class="game-icon">🌹</div>
+                            <h3>แฟนพันธุ์แท้วาเลนไทน์</h3>
+                            <p>ตอบคำถามความรู้รอบตัว 20 ข้อ <br>ท้าทายความจำเกี่ยวกับวันแห่งความรัก</p>
+                            <button class="play-btn">เริ่มเกม</button>
+                        </div>
+            
+                        <div class="game-card" onclick="startCoupleGame()">
+                            <div class="game-icon">💑</div>
+                            <h3>เกมทายใจ & รู้ใจแฟน</h3>
+                            <p>คำถามวัดระดับความใส่ใจ <br>ผลัดกันทายว่าอีกฝ่ายคิดอะไรอยู่?</p>
+                            <button class="play-btn">เริ่มเกม</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="game-board" style="display: none;">
+                    <button class="back-btn" onclick="backToQuizMenu()">⬅ กลับไปหน้าเลือกเกม</button>
+                    
+                    <div id="valentine-quiz-area" style="display: none;">
+                        <h3 id="v-question-number" style="color: var(--secondary);">ข้อที่ 1/20</h3>
+                        <div class="question-display">
+                            <p id="v-question-text" class="big-question">คำถามจะปรากฏที่นี่...</p>
+                        </div>
+                        <div id="v-options-area" class="options-grid">
+                            </div>
+                        <div id="v-score-box" style="margin-top: 20px; font-weight: bold; display: none;"></div>
+                    </div>
+            
+                    <div id="couple-quiz-area" style="display: none;">
+                        <div class="couple-instruction">
+                            <p>กติกา: อ่านคำถาม แล้วนับ 1-2-3 พร้อมกัน <br>จากนั้นชี้ไปที่คนที่เป็นคำตอบ หรือพูดคำตอบออกมาพร้อมกัน!</p>
+                        </div>
+                        
+                        <div class="card-stack">
+                            <div class="question-card-inner">
+                                <span class="q-icon">❓</span>
+                                <h2 id="c-question-text">พร้อมไหม?</h2>
+                            </div>
+                        </div>
+            
+                        <button class="next-q-btn" onclick="nextCoupleQuestion()">คำถามต่อไป ⏭</button>
+                    </div>
+            
+                </div>
+            </section>
+
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

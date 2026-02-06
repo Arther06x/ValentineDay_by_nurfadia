@@ -1,0 +1,687 @@
+:root {
+    --primary: #ff1493;       /* ชมพูเข้ม */
+    --secondary: #ff69b4;     /* ชมพูหวาน */
+    --bg-pink: #fff0f5;       /* พื้นหลังชมพูอ่อน */
+    --accent-red: #d32f2f;    /* แดง */
+    --sidebar-width: 260px;
+    --text-dark: #333;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bg-pink);
+    color: var(--text-dark);
+}
+
+/* --- Layout --- */
+.app-layout { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.logo-area { text-align: center; margin-bottom: 40px; }
+.heart-pulse { font-size: 3rem; animation: heartbeat 1.5s infinite; }
+.logo-area h2 { margin: 10px 0 0; font-size: 1.5rem; }
+
+.nav-btn {
+    display: block; width: 100%; padding: 15px 20px;
+    margin-bottom: 10px; border: none;
+    background: rgba(255,255,255,0.15); color: white;
+    text-align: left; font-size: 1rem; cursor: pointer;
+    border-radius: 12px; transition: all 0.3s;
+}
+.nav-btn:hover, .nav-btn.active {
+    background: white; color: var(--primary);
+    transform: translateX(5px); font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.sidebar-footer { margin-top: auto; text-align: center; font-size: 0.8rem; opacity: 0.8; }
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    flex-grow: 1; padding: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30h30v30h-30z' fill='%23ffe4e1'/%3E%3Cpath d='M30 30h-30v-30h30z' fill='%23ffe4e1'/%3E%3Cpath d='M25.7 20.3c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 4.4 3.6 8 8 8s8-3.6 8-8zm4.3 0c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 4.4 3.6 8 8 8s8-3.6 8-8zm-4.3 0c0 4.4-3.6 8-8 8s-8-3.6-8-8c0-4.4 3.6-8 8-8s8 3.6 8 8zm4.3 0c0 4.4-3.6 8-8 8s-8-3.6-8-8c0-4.4 3.6-8 8-8s8 3.6 8 8z' fill='%23ffc0cb' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+/* Sections */
+h1, h2 { color: var(--primary); text-align: center; }
+.content-section { animation: fadeIn 0.5s ease-in-out; }
+
+/* Home Section */
+.hero-box {
+    background: rgba(255,255,255,0.9);
+    padding: 50px; border-radius: 20px;
+    text-align: center; margin-top: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.cta-btn {
+    background: var(--accent-red); color: white;
+    padding: 12px 30px; border-radius: 30px;
+    border: none; font-size: 1.1rem; cursor: pointer;
+    margin: 10px; transition: transform 0.2s;
+}
+.outline-btn {
+    background: transparent; color: var(--primary);
+    padding: 10px 28px; border-radius: 30px;
+    border: 2px solid var(--primary); font-size: 1.1rem; cursor: pointer;
+    margin: 10px; transition: transform 0.2s;
+}
+.cta-btn:hover, .outline-btn:hover { transform: scale(1.05); }
+
+/* History Grid */
+.topic-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+.topic-card {
+    background: white; padding: 25px;
+    border-radius: 15px; text-align: center;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+}
+.topic-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--secondary);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+}
+.topic-card .icon { font-size: 3rem; margin-bottom: 15px; }
+.special-card { background-color: #fff5f8; border: 2px dashed var(--secondary); }
+
+/* Activity List */
+.activity-list {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.act-card {
+    background: white; padding: 20px;
+    border-radius: 15px; text-align: center;
+    border: 1px solid var(--secondary);
+}
+.act-emoji { font-size: 40px; }
+
+/* Quiz Styles */
+.quiz-container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; }
+.question-box { margin-bottom: 20px; text-align: left; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.question-box p { font-weight: bold; font-size: 1.1rem; }
+.question-box label { display: block; padding: 8px; cursor: pointer; border-radius: 5px; }
+.question-box label:hover { background: #ffeef5; }
+#quiz-result { margin-top: 20px; font-weight: bold; font-size: 1.2rem; text-align: center; color: var(--primary); }
+
+/* Modal Popup */
+.modal-overlay {
+    display: none; position: fixed; z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+    animation: fadeIn 0.3s;
+}
+.modal-content {
+    background-color: white; width: 90%; max-width: 800px;
+    max-height: 85vh; overflow-y: auto;
+    padding: 40px; border-radius: 20px;
+    position: relative;
+    border-top: 10px solid var(--primary);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+.close-btn {
+    position: absolute; top: 15px; right: 25px;
+    color: #999; font-size: 2.5rem; line-height: 0.8;
+    cursor: pointer; transition: color 0.2s;
+}
+.close-btn:hover { color: var(--accent-red); }
+
+/* Modal Content Typography */
+.modal-article h3 { border-bottom: 2px solid var(--bg-pink); padding-bottom: 10px; margin-top: 0; }
+.modal-article h4 { color: var(--secondary); margin-top: 25px; margin-bottom: 10px; }
+.modal-article p { line-height: 1.8; text-align: justify; color: #444; }
+.modal-article ul, .modal-article ol { line-height: 1.7; color: #444; }
+
+/* Keyframes */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .app-layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; padding: 10px; flex-direction: row; align-items: center; flex-wrap: wrap; }
+    .main-content { margin-left: 0; padding: 20px; }
+    .logo-area { display: none; } /* ซ่อนโลโก้ในมือถือเพื่อประหยัดที่ */
+    .sidebar nav { display: flex; overflow-x: auto; gap: 10px; width: 100%; }
+    .nav-btn { flex: 0 0 auto; width: auto; font-size: 0.9rem; margin-bottom: 0; white-space: nowrap; }
+    .sidebar-footer { display: none; }
+}
+
+/* --- Game Zone Styles --- */
+
+/* เมนูเลือกเกม */
+.game-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.game-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 3px solid var(--bg-pink);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(255, 20, 147, 0.2);
+}
+
+.game-icon { font-size: 4rem; margin-bottom: 15px; }
+
+.play-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* ปุ่มย้อนกลับ */
+.back-btn {
+    background: none;
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.back-btn:hover { background: var(--secondary); color: white; }
+
+/* กระดานเกมวาเลนไทน์ */
+.big-question {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 20px 0;
+    color: var(--text-dark);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid #ddd;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.option-btn:hover { background: #fff0f5; border-color: var(--secondary); }
+.option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+.option-btn.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+
+/* กระดานเกมคู่รัก */
+.couple-instruction {
+    background: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.question-card-inner {
+    background: white;
+    padding: 50px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 5px solid var(--bg-pink);
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-card-inner h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    line-height: 1.4;
+}
+
+.q-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+
+.next-q-btn {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px;
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+    transition: transform 0.2s;
+}
+.next-q-btn:hover { transform: scale(1.05); }
+
+/* --- Lucky Wheel Styles --- */
+
+.wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ตัววงล้อ (ใช้ Conic Gradient สร้างสีรุ้งพาสเทล) */
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    /* สีสันสลับกัน */
+    background: conic-gradient(
+        #ff9aa2 0deg 36deg, 
+        #ffb7b2 36deg 72deg, 
+        #ffdac1 72deg 108deg, 
+        #e2f0cb 108deg 144deg, 
+        #b5ead7 144deg 180deg, 
+        #c7ceea 180deg 216deg,
+        #ff9aa2 216deg 252deg,
+        #ffb7b2 252deg 288deg,
+        #ffdac1 288deg 324deg,
+        #e2f0cb 324deg 360deg
+    );
+    transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); /* หมุนแบบค่อยๆ หยุด */
+    position: relative;
+}
+
+/* จุดกึ่งกลางหัวใจ */
+.wheel-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+/* ตัวชี้ตำแหน่ง */
+.stopper {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: var(--accent-red);
+    z-index: 5;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+/* ฐานเงา */
+.wheel-shadow {
+    position: absolute;
+    bottom: -20px;
+    width: 80%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* ปุ่มกด */
+.spin-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+    transition: transform 0.2s;
+    font-weight: bold;
+}
+.spin-button:hover {
+    transform: scale(1.1);
+}
+.spin-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* กล่องผลลัพธ์ */
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border: 3px dashed var(--primary);
+    border-radius: 15px;
+    text-align: center;
+    animation: popUp 0.5s ease-out;
+}
+.result-box h3 { color: var(--accent-red); margin-top: 0; }
+.result-box p { font-size: 1.5rem; color: var(--text-dark); font-weight: bold; }
+
+@keyframes popUp {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* --- Ranking List Styles --- */
+.ranking-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 2px solid var(--bg-pink);
+}
+
+.ranking-container h3 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--bg-pink);
+    padding-bottom: 10px;
+    color: var(--primary);
+}
+
+.mission-list {
+    min-height: 100px;
+}
+
+.empty-state {
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
+}
+
+/* การ์ดรายการแต่ละอัน */
+.mission-item {
+    display: flex;
+    align-items: center;
+    background: #fff0f5;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid var(--secondary);
+    animation: slideIn 0.4s ease-out;
+}
+
+.mission-rank {
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.mission-text {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Schedule Timeline Styles --- */
+.schedule-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+.timeline-list {
+    position: relative;
+    padding-left: 20px;
+}
+
+/* เส้นแนวตั้งของ Timeline */
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 29px; /* ปรับตำแหน่งเส้น */
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.time-slot {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1; /* ให้อยู่เหนือเส้น */
+    opacity: 0.5; /* จางๆ ไว้ก่อนถ้ายังไม่ได้สุ่ม */
+    transition: all 0.3s;
+}
+
+.time-slot.active {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.time-slot.completed {
+    opacity: 1;
+}
+
+.time-badge {
+    background: var(--secondary);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    min-width: 100px;
+    text-align: center;
+    margin-right: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.slot-content {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    flex-grow: 1;
+    border: 1px solid #eee;
+    font-size: 1rem;
+}
+
+/* เน้น Slot ที่กำลังจะสุ่ม */
+.current-target .time-badge {
+    background: var(--primary);
+    animation: pulse 1.5s infinite;
+}
+.current-target .slot-content {
+    border: 2px solid var(--primary);
+    background: #fff0f5;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 20, 147, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0); }
+}
+
+/* =========================================
+   Mobile Responsive (รองรับมือถือทุกขนาด)
+   ========================================= */
+
+   @media (max-width: 768px) {
+    /* 1. ปรับ Layout หลัก */
+    .app-layout {
+        flex-direction: column;
+    }
+
+    /* 2. เปลี่ยน Sidebar เป็น Bottom Navigation Bar */
+    .sidebar {
+        width: 100%;
+        height: auto; /* ไม่เต็มจอแนวตั้งแล้ว */
+        position: fixed;
+        bottom: 0; /* ติดด้านล่าง */
+        top: auto;
+        flex-direction: row; /* เรียงปุ่มแนวนอน */
+        justify-content: space-around; /* กระจายปุ่มให้เท่ากัน */
+        padding: 10px 5px;
+        background: white; /* พื้นหลังขาวเพื่อให้เด่น */
+        border-top: 2px solid var(--bg-pink);
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    /* ซ่อนโลโก้และฟุตเตอร์ในมือถือ (เพื่อประหยัดที่) */
+    .logo-area, .sidebar-footer {
+        display: none;
+    }
+
+    .sidebar nav {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    /* ปรับปุ่มเมนูให้เป็นไอคอนเล็กๆ */
+    .nav-btn {
+        width: auto;
+        padding: 8px;
+        margin: 0;
+        background: transparent;
+        color: #999;
+        font-size: 0.8rem; /* ตัวหนังสือเล็กหน่อย */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .nav-btn.active {
+        background: var(--bg-pink);
+        color: var(--primary);
+        transform: none; /* ไม่ต้องขยับตอนกด */
+        box-shadow: none;
+    }
+
+    /* 3. ปรับเนื้อหาหลัก (Main Content) */
+    .main-content {
+        margin-left: 0; /* ไม่ต้องเว้นที่ซ้ายแล้ว */
+        padding: 20px;
+        padding-bottom: 90px; /* เว้นที่ด้านล่างกันเมนูบัง */
+        width: 100%;
+    }
+
+    /* 4. ปรับขนาดตัวอักษรและกล่องต่างๆ */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    
+    .hero-box {
+        padding: 30px 15px;
+        margin-top: 20px;
+    }
+
+    /* ปรับ Grid ให้เป็น 1-2 คอลัมน์พอ */
+    .topic-grid, .game-selection-grid, .activity-list {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* เล็กลงหน่อยเพื่อให้เรียง 2 แถวได้ */
+        gap: 15px;
+    }
+
+    /* ปรับวงล้อและ Timeline */
+    .wheel-container {
+        transform: scale(0.85); /* ย่อวงล้อลงนิดนึงกันล้นจอ */
+        margin: -20px auto; /* ดึงกลับให้ชิดขึ้น */
+    }
+
+    .schedule-container {
+        padding: 15px;
+    }
+    
+    .time-slot {
+        flex-direction: column; /* Timeline เรียงแนวตั้งในแต่ละช่อง */
+        align-items: flex-start;
+    }
+    
+    .time-badge {
+        margin-bottom: 10px;
+    }
+    
+    .timeline-list::before {
+        left: 0; /* เส้น Timeline ชิดซ้ายสุด */
+    }
+
+    /* 5. ปรับ Popup Modal ให้เต็มจอ */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        max-height: 80vh;
+    }
+}
+
+/* สำหรับมือถือจอเล็กมาก (เช่น iPhone SE รุ่นเก่า) */
+@media (max-width: 380px) {
+    .nav-btn { font-size: 0.7rem; }
+    .wheel-container { transform: scale(0.7); }
+    h1 { font-size: 1.5rem; }
+}
